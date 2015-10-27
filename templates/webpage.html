@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+<body>
+<input type="text" id="Name" value="Name">
+<br><br>
+<input type="number" id="Payment" value="Payment">
+<br><br>
+<input type="email" id="Email" value="Email">
+<br><br>
+
+<select id="currency">
+    <option value="dollar">Dollar</option>
+    <option value="pound">pound</option>
+    <option value="euro">euro</option>
+    <option value="yen">yen</option>
+</select>
+<br><br>
+<button id="button">Submit</button>
+
+</body>
+
+<script>
+
+$(document).ready(function(){
+
+
+
+
+    $("#button").click(function(){
+    var name = $("#Name").val();
+    var email = $("#Email").val();
+    var payment = $("#Payment").val();
+    var currency = $("#currency").val();
+        $.post("/app/",
+        {
+          name: name,
+          email: email,
+          payment: payment,
+          currency: currency,
+          csrfmiddlewaretoken: '{{csrf_token}}'
+         },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+</script>
+</html>
